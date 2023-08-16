@@ -9,3 +9,20 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
+# Set text encoding
+*.php   text eol=lf
+
+# Ignore generated files/vendor/    export-ignore
+/composer.lock  export-ignore
+
+# Ignore IDE configuration files
+.idea/  export-ignore.vscode/    export-ignore
+
+# Ignore logs and cache files/var/log/   export-ignore
+/var/cache/ export-ignore
+
+# Ignore sensitive filesconfig.php  export-ignore
+
+# Set line ending to LF for non-binary files
+*   text eol=lf
