@@ -15,6 +15,11 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <!-- Logout -->
+        <li class="nav-item">
+            <a href="{{ route('login.getLogout') }}" class="btn btn-danger">Logout</a>
+        </li>
+
         <!-- Navbar Search -->
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">

@@ -3,13 +3,26 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('backend.pages.users.index');
+        $search = $request['search'] ?? "";
+        if ($search != "") {
+            //where
+            $users = User::where('name', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('phone', 'like', "%$search%")
+                ->orWhere('role', 'like', "%$search%")
+                ->orWhere('address', 'like', "%$search%")->paginate(2);
+        } else {
+            $users = User::paginate(2);
+        }
+        $data = compact('users', 'search');
+        return view('backend.pages.users.index')->with($data);
     }
 
 
@@ -24,7 +37,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $user = new User();
+        $user['name'] = $input['name'];
+        $user['phone'] = $input['phone'];
+        $user['address'] = $input['address'];
+        $user['email'] = $input['email'];
+        $user['role'] = $input['role'];
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -40,7 +61,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('backend.pages.users.edit')->with(['user' => $user]);
     }
 
     /**
@@ -48,7 +70,16 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $input = $request->all();
+        $user = User::find($id);
+        $user['name'] = $input['name'];
+        $user['phone'] = $input['phone'];
+        $user['address'] = $input['address'];
+        $user['email'] = $input['email'];
+        $user['role'] = $input['role'];
+        $user->save();
+        return redirect()->route('users.index');
+
     }
 
     /**
@@ -56,6 +87,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('users.index');
     }
 }

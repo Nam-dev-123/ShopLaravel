@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -19,9 +20,9 @@ class ProductController extends Controller
                 ->orWhere('origin_price', 'like', "%$search%")
                 ->orWhere('sale_price', 'like', "%$search%")
                 ->orWhere('discount_percent', 'like', "%$search%")
-                ->orWhere('category_id', 'like', "%$search%")->paginate(1);
+                ->orWhere('category_id', 'like', "%$search%")->paginate(2);
         } else {
-            $products = Product::paginate(1);
+            $products = Product::paginate(2);
         }
         $data = compact('products', 'search');
         return view('backend.pages.products.index')->with($data);
@@ -42,6 +43,7 @@ class ProductController extends Controller
         $input = $request->all();
         $product = new Product();
         $product['name'] = $input['name'];
+        $product['slug'] = Str::slug($product['name']);
         $product['category_id'] = $input['category_id'];
         $product['sale_price'] = $input['sale_price'];
         $product['origin_price'] = $input['origin_price'];

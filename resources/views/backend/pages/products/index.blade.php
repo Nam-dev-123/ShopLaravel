@@ -52,7 +52,7 @@
                             <tr data-widget="expandable-table" aria-expanded="false">
                                 <td>{{ $product['id'] }}</td>
                                 <td>{{ $product['name'] }}</td>
-                                <td>{{ $product['origin_price'] }}</td>
+                                <td>{{ number_format($product['origin_price'],0,'.',',') }}</td>
                                 <td>{{ $product['discount_percent'] }}</td>
                                 <td>{{ $product['sale_price'] }}</td>
                                 <td>{{ $product->getCategory->name }}</td>
@@ -67,7 +67,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('products.edit', ['id' => $product['id']]) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="{{ route('$products.delete', ['id' => $product['id']]) }}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa bản ghi này?')">
+                                    <a href="{{ route('products.delete', ['id' => $product['id']]) }}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa bản ghi này?')">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
