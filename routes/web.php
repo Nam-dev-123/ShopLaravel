@@ -43,7 +43,13 @@ Route::prefix('/login')->group(function () {
     Route::get('/getLogout',[LoginContrroller::class, 'logout'])->name('login.getLogout');
 });
 
-Route::get('/test', function () {
-    return view('fontend.pages.test');
+//Route::get('/test', function () {
+//    return view('fontend.pages.test');
+//});
+
+//Kiem tra Reposotory hoạt động hay không
+Route::get('/test', function (\App\Repositories\Product\ProductRepositoryInterface $productRepository) {
+    return $productRepository->all();
 });
+
 

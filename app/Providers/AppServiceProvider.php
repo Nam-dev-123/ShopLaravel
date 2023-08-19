@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Product\ProductRepository;
+use App\Repositories\Product\ProductRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        //Product
+        $this->app->singleton(
+            ProductRepositoryInterface::class,
+            ProductRepository::class,
+        );
     }
 
     /**
