@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $userName = Auth::user()->name;
         $search = $request['search'] ?? "";
         if ($search != "") {
             //where
@@ -21,7 +23,7 @@ class UserController extends Controller
         } else {
             $users = User::paginate(2);
         }
-        $data = compact('users', 'search');
+        $data = compact('users', 'search','userName');
         return view('backend.pages.users.index')->with($data);
     }
 

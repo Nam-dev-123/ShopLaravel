@@ -15,7 +15,7 @@
                 <img src="{{ asset('assets/admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Nguyễn Nam</a>
+                <a href="#" class="d-block">{{ $userName }}</a>
             </div>
         </div>
 

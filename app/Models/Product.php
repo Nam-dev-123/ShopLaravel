@@ -10,6 +10,8 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
 
     public function getImages() {
         return $this->hasMany(Image::class,'product_id','id');

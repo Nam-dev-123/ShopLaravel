@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        $userName = Auth::user()->name;
         $search = $request['search'] ?? "";
         if ($search != "") {
             //where
@@ -24,7 +26,7 @@ class ProductController extends Controller
         } else {
             $products = Product::paginate(2);
         }
-        $data = compact('products', 'search');
+        $data = compact('products', 'search','userName');
         return view('backend.pages.products.index')->with($data);
     }
 
