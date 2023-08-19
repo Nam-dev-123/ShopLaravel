@@ -47,9 +47,14 @@ Route::prefix('/login')->group(function () {
 //    return view('fontend.pages.test');
 //});
 
-//Kiem tra Reposotory hoạt động hay không
-Route::get('/test', function (\App\Repositories\Product\ProductRepositoryInterface $productRepository) {
-    return $productRepository->all();
+////Kiem tra Reposotory hoạt động hay không
+//Route::get('/test', function (\App\Repositories\Product\ProductRepositoryInterface $productRepository) {
+//    return $productRepository->all();
+//});
+
+//Kiem tra Service hoạt động hay không
+Route::get('/test', function (\App\Service\Product\ProductServiceInterface $productService) {
+    return $productService->all();
 });
 
 
