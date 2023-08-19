@@ -44,6 +44,7 @@ Route::prefix('/login')->group(function () {
 });
 
 Route::get('/test', function () {
-    return view('fontend.pages.test');
+//    return view('fontend.pages.test');
+    return \App\Models\Product::find(1)->brand;
 });
 
